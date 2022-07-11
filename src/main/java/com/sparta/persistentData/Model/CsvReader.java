@@ -12,6 +12,7 @@ public class CsvReader {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] recordValues = line.split(",");
                 // TODO: check if valid and if so make new ValidRecord Object, else make new InvalidRecord Object
+                // TODO: use builder design pattern
             }
         } catch(IOException e) {
             e.printStackTrace();
