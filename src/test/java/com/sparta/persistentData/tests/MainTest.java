@@ -1,4 +1,4 @@
-package com.sparta.persistentData.Controller;
+package com.sparta.persistentData.tests;
 
 import org.junit.jupiter.api.Test;
 import java.util.Calendar;
