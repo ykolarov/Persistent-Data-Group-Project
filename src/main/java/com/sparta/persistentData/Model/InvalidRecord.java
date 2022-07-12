@@ -1,4 +1,5 @@
 package com.sparta.persistentData.Model;
 
-public class InvalidRecord {
+public class InvalidRecord{
+
 }
