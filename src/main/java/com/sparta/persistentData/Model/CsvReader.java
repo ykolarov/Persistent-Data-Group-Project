@@ -25,10 +25,15 @@ public class CsvReader {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] recordValues = line.split(",");
-                // TODO: check if valid and if so make new ValidRecord Object, else make new InvalidRecord Object
-                // TODO: if(valid) validRecords.add(new ValidRecord(recordValues));
-                // TODO: else invalidRecords.add(new InvalidRecord(recordValues));
+                Employee employee = new Employee( Integer.parseInt(recordValues [0]), recordValues [1], recordValues [3], recordValues [4], recordValues [5], recordValues [6], recordValues [7], new Date(recordValues [8]), new Date(recordValues [9]), Integer.parseInt(recordValues [10]));
+                boolean valid = employee.checkValidity();
+                if (valid){
+                    validRecords.add(new ValidRecord(recordValues));
+                }
+                else invalidRecords.add(new InvalidRecord(recordValues));
             }
+
+
         } catch(IOException e) {
             e.printStackTrace();
         }
