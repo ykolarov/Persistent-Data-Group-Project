@@ -10,6 +10,5 @@ public class Main {
         Displayer displayer = new Displayer(); // view
         String result = csvReader.readFile("resources/EmployeeRecords1.xlsx");
         displayer.displayData(result);
-
     }
 }
