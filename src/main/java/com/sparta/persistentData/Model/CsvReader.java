@@ -1,16 +1,17 @@
 package com.sparta.persistentData.Model;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class CsvReader {
 
     private HashSet<ValidRecord> validRecords;
-    private HashSet<ValidRecord> invalidRecords;
+    private ArrayList<ValidRecord> invalidRecords;
 
     public CsvReader() {
         validRecords = new HashSet<>();
-        invalidRecords = new HashSet<>();
+        invalidRecords = new ArrayList<>();
     }
     public String readFile(String filename) {
         String result = "";
