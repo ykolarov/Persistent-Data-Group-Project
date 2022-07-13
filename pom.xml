@@ -36,9 +36,6 @@
             <artifactId>junit-jupiter</artifactId>
             <version>5.8.2</version>
         </dependency>
-    </dependencies>
-
-    <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -46,5 +43,6 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
+
 
 </project>
