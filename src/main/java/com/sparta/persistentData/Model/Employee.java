@@ -1,4 +1,4 @@
-package com.sparta.persistentData.objects;
+package com.sparta.persistentData.Model;
 
 import lombok.Builder;
 import lombok.NonNull;

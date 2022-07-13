@@ -1,7 +1,5 @@
 package com.sparta.persistentData.Model;
 
-import com.sparta.persistentData.objects.Employee;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,8 +9,8 @@ import java.util.HashSet;
 
 public class CsvReader {
 
-    private HashSet<ValidRecord> validRecords;
-    private ArrayList<InvalidRecord> invalidRecords;
+    private HashSet<Employee> validRecords;
+    private ArrayList<Employee> invalidRecords;
 
     public CsvReader() {
         validRecords = new HashSet<>();
@@ -28,9 +26,9 @@ public class CsvReader {
                 Employee employee = new Employee( Integer.parseInt(recordValues [0]), recordValues [1], recordValues [3], recordValues [4], recordValues [5], recordValues [6], recordValues [7], new Date(recordValues [8]), new Date(recordValues [9]), Integer.parseInt(recordValues [10]));
                 boolean valid = employee.checkValidity();
                 if (valid){
-                    validRecords.add(new ValidRecord(recordValues));
+                    validRecords.add(employee);
                 }
-                else invalidRecords.add(new InvalidRecord(recordValues));
+                else invalidRecords.add(employee);
             }
 
 

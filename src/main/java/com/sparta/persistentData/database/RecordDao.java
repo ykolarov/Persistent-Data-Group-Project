@@ -1,20 +1,26 @@
 package com.sparta.persistentData.database;
 
-import com.sparta.persistentData.Model.ValidRecord;
+import com.sparta.persistentData.Model.Employee;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashSet;
 
-public class RecordDao implements Dao<ValidRecord>{
+public class RecordDao implements Dao<Employee>{
 
     private Connection conn;
     private ConnectionManager connectionManager;
+    private PreparedStatement preparedInsert;
+
+    private static final String insertStatement =
+            "INSERT INTO EMPLOYEE (NAME, SALARY, CREATED_DATE) VALUES (?,?,?)";
+
 
     public RecordDao() {
         connectionManager = new ConnectionManager();
         conn = connectionManager.getDatabaseConnection();
+
         try {
             conn.setAutoCommit(false);
         } catch (SQLException e) {
@@ -23,22 +29,22 @@ public class RecordDao implements Dao<ValidRecord>{
     }
 
     @Override
-    public void saveAll(HashSet<ValidRecord> t) {
-        PreparedStatement ps;
-    }
-
-    @Override
-    public void save(ValidRecord validRecord) {
+    public void saveAll(HashSet<Employee> t) {
 
     }
 
     @Override
-    public void update(ValidRecord validRecord, String[] params) {
+    public void save(Employee validRecord) {
 
     }
 
     @Override
-    public void delete(ValidRecord validRecord) {
+    public void update(Employee validRecord, String[] params) {
+
+    }
+
+    @Override
+    public void delete(Employee validRecord) {
 
     }
 }
