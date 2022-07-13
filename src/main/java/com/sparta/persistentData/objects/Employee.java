@@ -1,12 +1,12 @@
 package com.sparta.persistentData.objects;
 
 import lombok.Builder;
+import lombok.NonNull;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@Builder
 public class Employee {
 
     private final int empID;
@@ -21,7 +21,18 @@ public class Employee {
     private final int salary;
     private final boolean validRecord;
 
-    public Employee(int empID, String namePrefix, String firstName, String middleInitial, String lastName, String gender, String email, Date dateOfBirth, Date dateOfJoining, int salary) {
+    public Employee(@NonNull int empID,
+                    @NonNull String namePrefix,
+                    @NonNull String firstName,
+                    @NonNull String middleInitial,
+                    @NonNull String lastName,
+                    @NonNull String gender,
+                    @NonNull String email,
+                    @NonNull Date dateOfBirth,
+                    @NonNull Date dateOfJoining,
+                    @NonNull int salary,
+                    @NonNull boolean validRecord
+    ) {
         this.empID = empID;
         this.namePrefix = namePrefix;
         this.firstName = firstName;
@@ -36,17 +47,8 @@ public class Employee {
     }
 
     public boolean checkValidity() {
-        boolean result = true;
-        result = result && empIdIsValid();
-        result = result && namePrefixIsValid();
-        result = result && namesAreValid();
-        result = result && middleInitialIsValid();
-        result = result && genderIsValid();
-        result = result && emailIsValid();
-        result = result && dateOfBirthIsValid();
-        result = result && dateOfJoiningIsValid();
-        result = result && salaryIsValid();
-        return result;
+        return emailIsValid() && namePrefixIsValid() && namesAreValid() && middleInitialIsValid() && genderIsValid() && emailIsValid()
+                && emailIsValid() && dateOfBirthIsValid() && dateOfJoiningIsValid() && salaryIsValid();
     }
 
     public boolean namePrefixIsValid() {
@@ -74,7 +76,6 @@ public class Employee {
     }
     public boolean salaryIsValid() {
         return salary <= 0;
-
     }
     public boolean namesAreValid() {
         if (firstName == null || lastName == null ||
