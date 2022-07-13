@@ -1,11 +1,10 @@
-package com.sparta.persistentData.Model;
+package com.sparta.persistentData.database;
 
+import java.util.HashSet;
 import java.util.List;
 
 public interface Dao<T> {
-    List<T> getAll();
-
-    T get(int empID);
+    void saveAll(HashSet<T> t);
 
     void save(T t);
 

@@ -8,19 +8,22 @@ import java.sql.*;
 import java.util.Properties;
 
 @Getter
-public class SQLManager {
+public class ConnectionManager {
 
     private String url;
     private String username;
     private String password;
     private FileInputStream fileInputStream;
     private Properties properties;
-    private Connection connection;
+    private static Connection connection;
 
     @SneakyThrows
-    public void getDatabaseConnection() {
+    public Connection getDatabaseConnection() {
         this.loadPropertiesData();
-        this.loadConnection();
+        return getConnection();
+    }
+    public void closeDatabaseConnection() throws SQLException {
+        connection.close();
     }
 
     private void loadPropertiesData() {
@@ -36,17 +39,16 @@ public class SQLManager {
         }
     }
 
-    private void loadConnection() {
-        try {
-            this.connection = DriverManager.getConnection(
-                    this.url, this.username, this.password
-            );
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+    private Connection getConnection() {
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection(
+                        this.url, this.username, this.password
+                );
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+            }
         }
-    }
-
-    public void closeConnection() throws SQLException {
-        this.connection.close();
+        return connection;
     }
 }

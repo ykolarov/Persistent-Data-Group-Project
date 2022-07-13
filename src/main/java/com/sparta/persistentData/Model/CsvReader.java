@@ -1,13 +1,18 @@
 package com.sparta.persistentData.Model;
 
-import java.io.*;
+import com.sparta.persistentData.objects.Employee;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 
 public class CsvReader {
 
     private HashSet<ValidRecord> validRecords;
-    private ArrayList<ValidRecord> invalidRecords;
+    private ArrayList<InvalidRecord> invalidRecords;
 
     public CsvReader() {
         validRecords = new HashSet<>();
