@@ -19,7 +19,7 @@ public class Employee {
     private final Date dateOfBirth;
     private final Date dateOfJoining;
     private final int salary;
-    //private final boolean validRecord;
+    private final boolean validRecord;
 
     public Employee(@NonNull int empID,
                     @NonNull String namePrefix,
@@ -31,7 +31,6 @@ public class Employee {
                     @NonNull Date dateOfBirth,
                     @NonNull Date dateOfJoining,
                     @NonNull int salary
-                    //@NonNull boolean validRecord
     ) {
         this.empID = empID;
         this.namePrefix = namePrefix;
@@ -43,13 +42,14 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
         this.dateOfJoining = dateOfJoining;
         this.salary = salary;
-        //this.validRecord = checkValidity();
+        this.validRecord = checkValidity();
     }
 
 
     public boolean checkValidity() {
-        return emailIsValid() && namePrefixIsValid() && namesAreValid() && middleInitialIsValid() && genderIsValid() && emailIsValid()
-                && emailIsValid() && dateOfBirthIsValid() && dateOfJoiningIsValid() && salaryIsValid();
+        return emailIsValid() && namePrefixIsValid() && namesAreValid() &&
+                middleInitialIsValid() && genderIsValid() && emailIsValid() &&
+                dateOfBirthIsValid() && dateOfJoiningIsValid() && salaryIsValid() && empIdIsValid();
     }
 
     public boolean namePrefixIsValid() {

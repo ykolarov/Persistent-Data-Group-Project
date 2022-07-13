@@ -20,21 +20,33 @@ public class CsvReader {
         String result = "";
         try (FileReader fileReader = new FileReader(filename);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] recordValues = line.split(",");
-                Employee employee = new Employee( Integer.parseInt(recordValues [0]), recordValues [1], recordValues [3], recordValues [4], recordValues [5], recordValues [6], recordValues [7], new Date(recordValues [8]), new Date(recordValues [9]), Integer.parseInt(recordValues [10]));
-                boolean valid = employee.checkValidity();
-                if (valid){
-                    validRecords.add(employee);
-                }
-                else invalidRecords.add(employee);
-            }
-
-
+             String line;
+            bufferedReader.readLine();
+             while ((line = bufferedReader.readLine()) != null) {
+                 String[] recordValues = line.split(",");
+                 addNewEmployee(recordValues);
+             }
         } catch(IOException e) {
             e.printStackTrace();
         }
         return result;
+    }
+
+    private void addNewEmployee(String[] recordValues){
+        Employee employee = new Employee(
+                Integer.parseInt(recordValues [0]),
+                recordValues [1],
+                recordValues [2],
+                recordValues [3],
+                recordValues [4],
+                recordValues [5],
+                recordValues [6],
+                new Date(recordValues [7]),
+                new Date(recordValues [8]),
+                Integer.parseInt(recordValues [9])
+        );
+        if (employee.checkValidity())
+            validRecords.add(employee);
+        else invalidRecords.add(employee);
     }
 }

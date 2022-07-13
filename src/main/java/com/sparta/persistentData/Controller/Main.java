@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         CsvReader csvReader = new CsvReader(); // model
         Displayer displayer = new Displayer(); // view
-        String result = csvReader.readFile("resources/EmployeeRecords1.xlsx");
+        String result = csvReader.readFile("resources/EmployeeRecords1.csv");
         displayer.displayData(result);
     }
 }
