@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
 public class Employee {
 
     private  int empID;
@@ -58,17 +60,13 @@ public class Employee {
         List<String> validOptions = Arrays.asList("Mr.", "Mrs.", "Dr.", "Hon.", "Prof.", "Ms.");
         return validOptions.contains(namePrefix);
     }
+
     public boolean middleInitialIsValid() {
-        if (middleInitial.matches("^.*[^a-zA-Z].*$") || middleInitial.length() != 1){
-            return false;
-        }
-        return false;
+        return middleInitial.matches("^[A-Z]$") && middleInitial.length() == 1;
     }
+
     public boolean emailIsValid() {
-        if (email.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")){
-            return false;
-        }
-        return true;
+        return email.matches("^[a-zA-Z0-9_#$%&’*+/=?^.-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
     }
     public boolean dateOfJoiningIsValid() {
         Calendar today = Calendar.getInstance();
@@ -77,18 +75,15 @@ public class Employee {
     }
 
     public boolean empIdIsValid() {
-        return empID <= 0;
+        return empID >= 0;
     }
     public boolean salaryIsValid() {
         return salary <= 0;
     }
     public boolean namesAreValid() {
-        if (firstName == null || lastName == null ||
-                firstName.matches("^.*[^a-zA-Z].*$") ||
-                lastName.matches("^.*[^a-zA-Z].*$")) {
-            return false;
-        }
-        return true;
+        return firstName != null && lastName != null &&
+                firstName.matches("^[a-zA-z]+$") &&
+                lastName.matches("^[a-zA-z]+$");
     }
 
     public boolean genderIsValid (){
@@ -96,9 +91,6 @@ public class Employee {
     }
 
     public boolean dateOfBirthIsValid() {
-        if (dateOfBirth.after(dateOfJoining) || dateOfBirth.before(new Date())) {
-            return false;
-        }
-        return true;
+        return !dateOfBirth.after(dateOfJoining) && !dateOfBirth.after(new Date());
     }
 }
