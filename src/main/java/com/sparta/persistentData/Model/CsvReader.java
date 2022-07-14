@@ -49,7 +49,7 @@ public class CsvReader {
                 new Date(recordValues [8]),
                 Integer.parseInt(recordValues [9])
         );
-        if (employee.checkValidity())
+        if (employee.isValidRecord())
             Employee.getValidRecords().add(employee);
         else Employee.getInvalidRecords().add(employee);
     }

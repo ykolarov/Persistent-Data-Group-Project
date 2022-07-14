@@ -91,7 +91,7 @@ public class Employee {
             missingCount +=1;
         }
         if(usedEmployeeIds.contains(empID)) {
-            this.empID = -1;
+            this.validRecord = false;
             IDDupCount +=1;
         } else {
             usedEmployeeIds.add(empID);
@@ -130,7 +130,7 @@ public class Employee {
     public String toString() {
         return this.namePrefix + " " + this.firstName + " " +
                 this.middleInitial + " " + this.lastName + " with email " + this.email
-                + " and salary " + this.salary + " and gender " + this.gender +
+                 + " and gender " + this.gender +
                 " born in " + this.dateOfBirth + " joined in " + this.dateOfJoining +
                 " with employee id " + this.empID + " and salary " + this.salary;
     }
