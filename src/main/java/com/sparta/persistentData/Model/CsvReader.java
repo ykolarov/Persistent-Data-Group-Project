@@ -9,12 +9,9 @@ import java.util.HashSet;
 
 public class CsvReader {
 
-    private HashSet<Employee> validRecords;
-    private ArrayList<Employee> invalidRecords;
 
     public CsvReader() {
-        validRecords = new HashSet<>();
-        invalidRecords = new ArrayList<>();
+
     }
     public String readFile(String filename) {
         String result = "";
@@ -46,7 +43,7 @@ public class CsvReader {
                 Integer.parseInt(recordValues [9])
         );
         if (employee.checkValidity())
-            validRecords.add(employee);
-        else invalidRecords.add(employee);
+            Employee.getValidRecords().add(employee);
+        else Employee.getInvalidRecords().add(employee);
     }
 }
