@@ -32,7 +32,7 @@ public class ConnectionManager {
 
     private void loadPropertiesData() {
         try {
-            this.fileInputStream = new FileInputStream(".db_properties");
+            this.fileInputStream = new FileInputStream("resources/.db_properties");
             this.properties = new Properties();
             properties.load(fileInputStream);
             this.url = properties.getProperty("db_url");

@@ -14,14 +14,17 @@ public class Main {
         Displayer displayer = new Displayer(); // view
         String result = csvReader.readFile("resources/EmployeeRecords1.csv");
         displayer.displayData(result);
-
+        var start = System.currentTimeMillis();
         insertEmployeesInDatabase();
+        var stop = System.currentTimeMillis();
+        System.out.println("Time to complete process: " + (stop-start) + "ms");
     }
 
     private static void insertEmployeesInDatabase() {
         ConnectionManager connectionManager = new ConnectionManager();
         Connection conn = connectionManager.getDatabaseConnection();
         RecordDao recordDao = new RecordDao(conn);
+        recordDao.createTable("Employee");
         recordDao.saveAll(Employee.getValidRecords());
         connectionManager.closeDatabaseConnection();
     }
