@@ -7,25 +7,39 @@ import com.sparta.persistentData.database.ConnectionManager;
 import com.sparta.persistentData.database.RecordDao;
 
 import java.sql.Connection;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         CsvReader csvReader = new CsvReader(); // model
         Displayer displayer = new Displayer(); // view
-        String result = csvReader.readFile("resources/EmployeeRecords1.csv");
-        displayer.displayData(result);
-        var start = System.currentTimeMillis();
-        insertEmployeesInDatabase();
-        var stop = System.currentTimeMillis();
-        System.out.println("Time to complete process: " + (stop-start) + "ms");
-    }
-
-    private static void insertEmployeesInDatabase() {
         ConnectionManager connectionManager = new ConnectionManager();
         Connection conn = connectionManager.getDatabaseConnection();
         RecordDao recordDao = new RecordDao(conn);
+
+        String result = csvReader.readFile("resources/EmployeeRecords1.csv");
+        displayer.displayData(result);
+
+        insertRecordsInDb(recordDao);
+        allowUserToQueryDb(displayer, recordDao);
+
+        connectionManager.closeDatabaseConnection();
+    }
+
+    private static void allowUserToQueryDb(Displayer displayer, RecordDao recordDao) {
+        while(true) {
+            int empId = displayer.getKeyboardInput();
+            if (empId == -1) break;
+            Employee e = recordDao.get(empId);
+            displayer.displayData(e.toString());
+        }
+    }
+
+    private static void insertRecordsInDb(RecordDao recordDao) {
+        var start = System.currentTimeMillis();
         recordDao.createTable("Employee");
         recordDao.saveAll(Employee.getValidRecords());
-        connectionManager.closeDatabaseConnection();
+        var stop = System.currentTimeMillis();
+        System.out.println("Time to insert values in DB: " + (stop-start)/1000 + "sec");
     }
 }

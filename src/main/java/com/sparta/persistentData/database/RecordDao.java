@@ -77,11 +77,21 @@ public class RecordDao implements Dao<Employee>{
 
     @SneakyThrows
     public Employee get(int empID) {
-        try {
-            Statement statement = conn.createStatement();
-            ResultSet set = statement.executeQuery("select * from " + " where empid = " );
-            // TODO: write sql statement to retrieve individual records
-            // TODO: give users keyboard input option to choose empID in displayer and enable them to call this method
+        try (Statement statement = conn.createStatement()) {
+            ResultSet rs = statement.executeQuery("select * from Employee where empid = " + empID);
+            if(rs.next()) {
+                return new Employee(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getDate(8),
+                        rs.getDate(9),
+                        rs.getInt(10));
+            }
         } catch (Exception exception) {
             exception.printStackTrace();
         }
