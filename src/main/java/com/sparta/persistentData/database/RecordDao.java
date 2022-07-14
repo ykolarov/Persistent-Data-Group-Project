@@ -10,9 +10,13 @@ import java.util.HashSet;
 
 public class RecordDao implements Dao<Employee>{
 
-    private Connection conn;
-    private ConnectionManager connectionManager;
-    private PreparedStatement preparedInsert;
+    // TODO: write sql statement to retrieve individual records ->
+    //      get method below + get user keyboard input in displayer to call the function
+
+    // TODO: if table exists drop first ->
+    //      then insert all into table
+
+    private final PreparedStatement preparedInsert;
 
     private static final String INSERT_STATEMENT =
             "INSERT INTO EMPLOYEE " +
@@ -20,12 +24,9 @@ public class RecordDao implements Dao<Employee>{
             " LAST_NAME, GENDER, EMAIL, DATE_OF_BIRTH, DATE_OF_JOINING, SALARY)" +
             "VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-    public RecordDao() {
+    public RecordDao(Connection conn) {
         try {
-            connectionManager = new ConnectionManager();
-            conn = connectionManager.getDatabaseConnection();
             preparedInsert = conn.prepareStatement(INSERT_STATEMENT);
-            conn.setAutoCommit(false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -33,6 +34,7 @@ public class RecordDao implements Dao<Employee>{
 
     @Override
     public void saveAll(HashSet<Employee> toBeInserted) {
+        int updatedCount = 0 ;
         try {
             for (Employee e : toBeInserted) {
                 preparedInsert.setInt(1, e.getEmpID());
@@ -45,26 +47,17 @@ public class RecordDao implements Dao<Employee>{
                 preparedInsert.setDate(8, (Date) e.getDateOfBirth());
                 preparedInsert.setDate(9, (Date) e.getDateOfJoining());
                 preparedInsert.setInt(10, e.getSalary());
-                int result = preparedInsert.executeUpdate();
-                System.out.println("rows updated: " + result);
+                updatedCount += preparedInsert.executeUpdate();
             }
+            System.out.println("rows updated: " + updatedCount);
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
 
     @Override
-    public void save(Employee validRecord) {
-
+    public Employee get(int empId) {
+        return null;
     }
 
-    @Override
-    public void update(Employee validRecord, String[] params) {
-
-    }
-
-    @Override
-    public void delete(Employee validRecord) {
-
-    }
 }

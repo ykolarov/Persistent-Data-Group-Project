@@ -1,3 +1,3 @@
-db_url=jdbc:mysql://localhost:3306/test
+db_url=jdbc:mysql://localhost:3306/Employee
 db_username=root
 db_password=12345

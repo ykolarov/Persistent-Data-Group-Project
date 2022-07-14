@@ -22,8 +22,12 @@ public class ConnectionManager {
         this.loadPropertiesData();
         return getConnection();
     }
-    public void closeDatabaseConnection() throws SQLException {
-        connection.close();
+    public void closeDatabaseConnection() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void loadPropertiesData() {
@@ -45,6 +49,7 @@ public class ConnectionManager {
                 connection = DriverManager.getConnection(
                         this.url, this.username, this.password
                 );
+                connection.setAutoCommit(false);
             } catch (SQLException exception) {
                 exception.printStackTrace();
             }

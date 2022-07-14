@@ -6,9 +6,6 @@ import java.util.List;
 public interface Dao<T> {
     void saveAll(HashSet<T> t);
 
-    void save(T t);
+    T get(int empId);
 
-    void update(T t, String[] params);
-
-    void delete(T t);
 }

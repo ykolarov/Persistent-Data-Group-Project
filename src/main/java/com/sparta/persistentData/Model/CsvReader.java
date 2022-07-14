@@ -9,10 +9,6 @@ import java.util.HashSet;
 
 public class CsvReader {
 
-
-    public CsvReader() {
-
-    }
     public String readFile(String filename) {
         String result = "";
         try (FileReader fileReader = new FileReader(filename);
