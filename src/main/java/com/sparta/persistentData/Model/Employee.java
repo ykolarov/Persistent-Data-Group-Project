@@ -1,25 +1,27 @@
 package com.sparta.persistentData.Model;
 
-import lombok.Builder;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class Employee {
 
-    private final int empID;
-    private final String namePrefix;
-    private final String firstName;
-    private final String middleInitial;
-    private final String lastName;
-    private final String gender;
-    private final String email;
-    private final Date dateOfBirth;
-    private final Date dateOfJoining;
-    private final int salary;
-    private final boolean validRecord;
+    private  int empID;
+    private  String namePrefix;
+    private  String firstName;
+    private  String middleInitial;
+    private  String lastName;
+    private  String gender;
+    private  String email;
+    private  Date dateOfBirth;
+    private  Date dateOfJoining;
+    private  int salary;
+    private  boolean validRecord;
 
     public Employee(@NonNull int empID,
                     @NonNull String namePrefix,
@@ -69,7 +71,9 @@ public class Employee {
         return true;
     }
     public boolean dateOfJoiningIsValid() {
-        return dateOfBirth.before(new Date()); // in the future
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        return dateOfJoining.before(today.getTime()); // in the future
     }
 
     public boolean empIdIsValid() {
@@ -88,10 +92,7 @@ public class Employee {
     }
 
     public boolean genderIsValid (){
-        if (gender.length() != 1 || !gender.equals("M") || !gender.equals("F")){
-            return false;
-        }
-        return true;
+        return gender.equals("M") || gender.equals("F");
     }
 
     public boolean dateOfBirthIsValid() {
@@ -100,44 +101,4 @@ public class Employee {
         }
         return true;
     }
-
-
-
-    public int getEmpID() {
-        return this.empID;
-    }
-
-    public String getNamePrefix() {
-        return this.namePrefix;
-    }
-
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public String getMiddleInitial() {
-        return this.middleInitial;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public String getGender() {
-        return this.gender;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public Date getDateOfBirth() {
-        return this.dateOfBirth;
-    }
-
-    public Date getDateOfJoining() {
-        return this.dateOfJoining;
-    }
-
-    public int getSalary(){return this.salary;}
 }

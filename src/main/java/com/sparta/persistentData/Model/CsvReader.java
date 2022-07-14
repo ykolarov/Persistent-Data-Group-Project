@@ -21,7 +21,7 @@ public class CsvReader {
         try (FileReader fileReader = new FileReader(filename);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
              String line;
-            bufferedReader.readLine();
+             bufferedReader.readLine();
              while ((line = bufferedReader.readLine()) != null) {
                  String[] recordValues = line.split(",");
                  addNewEmployee(recordValues);
