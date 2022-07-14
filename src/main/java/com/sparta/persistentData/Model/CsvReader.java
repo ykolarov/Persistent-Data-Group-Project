@@ -22,6 +22,17 @@ public class CsvReader {
         } catch(IOException e) {
             e.printStackTrace();
         }
+        result += "Amount of valid(unique and clean) records: " + Employee.getValidRecords().size();
+        result += "\nAmount of invalid records: " + Employee.getInvalidRecords().size();
+        result += "\nAmount of Employee ID duplicates: " + Employee.getIDDupCount();
+        result += "\nAmount of empty or null fields: " + Employee.getMissingCount();
+        if(Employee.getInvalidRecords().size() > 3) {
+            result += "\n3 examples of invalid records: ";
+            for (int i = 0; i < 3; i++) {
+                result += "\n" + Employee.getInvalidRecords().get(i).toString();
+            }
+        }
+
         return result;
     }
 

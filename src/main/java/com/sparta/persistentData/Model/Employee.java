@@ -13,6 +13,16 @@ public class Employee {
     private static HashSet<Employee> validRecords = new HashSet<>();
     private static HashSet<Integer> usedEmployeeIds = new HashSet<>();
     private static ArrayList<Employee> invalidRecords = new ArrayList<>();
+    private static int IDDupCount = 0;
+    private static int missingCount = 0;
+
+    public static int getMissingCount(){
+        return missingCount;
+    }
+
+    public static int getIDDupCount() {
+        return IDDupCount;
+    }
     public static HashSet<Employee> getValidRecords() {
         return validRecords;
     }
@@ -45,17 +55,42 @@ public class Employee {
                     @NonNull int salary
     ) {
         this.empID = empID;
+        if (empID == 0){
+            missingCount +=1;
+        }
         this.namePrefix = namePrefix;
+        if (namePrefix == null){
+            missingCount +=1;
+        }
         this.firstName = firstName;
+        if (firstName == null){
+            missingCount +=1;
+        }
         this.middleInitial = middleInitial;
+        if (middleInitial == null){
+            missingCount +=1;
+        }
         this.lastName = lastName;
+        if (lastName == null){
+            missingCount +=1;
+        }
         this.gender = gender;
+        if (gender == null){
+            missingCount +=1;
+        }
         this.email = email;
+        if (email == null){
+            missingCount +=1;
+        }
         this.dateOfBirth = dateOfBirth;
         this.dateOfJoining = dateOfJoining;
         this.salary = salary;
+        if (salary == 0){
+            missingCount +=1;
+        }
         if(usedEmployeeIds.contains(empID)) {
             this.empID = -1;
+            IDDupCount +=1;
         } else {
             usedEmployeeIds.add(empID);
             this.validRecord = checkValidity();
@@ -72,7 +107,7 @@ public class Employee {
     }
 
     public boolean namePrefixIsValid() {
-        List<String> validOptions = Arrays.asList("Mr.", "Mrs.", "Dr.", "Hon.", "Prof.", "Ms.");
+        List<String> validOptions = Arrays.asList("Mr.", "Mrs.", "Drs.", "Hon.", "Prof.", "Ms.", "Dr.");
         return validOptions.contains(namePrefix);
     }
 
@@ -102,7 +137,7 @@ public class Employee {
         return empID >= 0;
     }
     public boolean salaryIsValid() {
-        return salary <= 0;
+        return salary > 0;
     }
     public boolean namesAreValid() {
         return firstName != null && lastName != null &&
