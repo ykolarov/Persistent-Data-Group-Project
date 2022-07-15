@@ -23,6 +23,6 @@ public class Main {
         String result = csvReader.readFile(FILE_NAME);
         displayer.displayData(result);
 
-        //databaseManager.start(displayer);
+        databaseManager.start(displayer);
     }
 }
