@@ -100,7 +100,6 @@ public class Employee {
 
     }
 
-
     public boolean checkValidity() {
         return emailIsValid() && namePrefixIsValid() && namesAreValid() &&
                 middleInitialIsValid() && genderIsValid() && emailIsValid() &&

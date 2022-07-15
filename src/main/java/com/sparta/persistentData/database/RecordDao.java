@@ -78,7 +78,7 @@ public class RecordDao implements Dao<Employee>{
     @SneakyThrows
     public Employee get(int empID) {
         try (Statement statement = conn.createStatement()) {
-            ResultSet rs = statement.executeQuery("select * from Employee where empid = " + empID);
+            ResultSet rs = statement.executeQuery("select * from employee where empID = " + empID);
             if(rs.next()) {
                 return new Employee(
                         rs.getInt(1),

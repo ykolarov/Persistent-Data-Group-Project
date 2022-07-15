@@ -10,7 +10,7 @@ import java.util.HashSet;
 public class CsvReader {
 
     public String readFile(String filename) {
-        String result = "";
+        String result = "Data for file: " + filename;
         try (FileReader fileReader = new FileReader(filename);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
              String line;
