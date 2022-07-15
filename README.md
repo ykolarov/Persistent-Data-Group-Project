@@ -34,8 +34,6 @@ We solved this largely through trial and error by testing valid inputs via JUnit
     }
 ````
 
-
-
 ## *Phase Two* 
 
 - Write the SQL statements to create a table and to persist data to the table
@@ -43,4 +41,26 @@ We solved this largely through trial and error by testing valid inputs via JUnit
 - Install the drivers for the database to be used (MySQL) and create a connection
 - Create a data access object (DAO Pattern) to persist the data to the database
 - Persist employee records and write code to retrieve individual records from the database
-### **SOLUTION**
+  ### **SOLUTION**
+
+
+
+
+
+## *Phase Three*
+- Use the second file, (EmployeeRecordsLarge.csv), which can be assumed to have already been cleaned.
+- Record time taken to persist to MySQL before implementing multiple threads.
+- Add multithreading to your application for writing the data to the database, comparing the execution time with thee single-threaded version.
+- Try different numbers of threads and compare the results - what is the optimum number of threads? **Record this information in the README.md,**
+  ### **SOLUTION**
+- The large employee records took 14 seconds with a single thread (without multithreading)
+
+
+
+
+
+
+## *Phase Four*
+- Modify code to make use of functional programming concepts - lambdas and streams.
+- Keep the original code and then run tests to see if efficiency has improved by adding functional code.
+  ### **SOLUTION**
