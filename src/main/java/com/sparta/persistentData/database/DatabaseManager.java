@@ -54,7 +54,6 @@ public class DatabaseManager {
 
     private Thread getThread(HashSet<Employee> records, int from, int to) {
         return new Thread(() -> {
-            System.out.println("Thread: " + Thread.currentThread().getName());
             var collectionPortion = records.stream().
                     toList().subList(from, to);
             recordDao.saveAll(new HashSet<>(collectionPortion));

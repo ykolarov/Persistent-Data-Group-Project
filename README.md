@@ -1,14 +1,18 @@
 # **Persistent-Data-Group-Project**
 
-IN THIS README WE  WOULD BE SHOWING THE TASKS THAT WE WOULD BE COMPLETING AND HOW WE COMPLETED THEM AND WHAT ISSUES WE HAD ALONG THE WAY!
+IN THIS README WE  WOULD BE SHOWING THE TASKS THAT WE WOULD BE COMPLETING AND HOW WE COMPLETED THEM AND WHAT ISSUES WE HAD ALONG THE WAY
 
-Yanaki Kolarov - Worked on MVC structure; querying, insertion, table creation for database; conversion of csv text to an employee valid hashset or invalid arraylist(duplicates); multithreaded writing to database; Wrote tests.
+**Yanaki Kolarov** - Worked on MVC structure; querying, insertion, table creation for database; conversion of csv text to an employee valid hashset or invalid arraylist(duplicates); multithreaded writing to database; Wrote tests.
 
-Billie Parsons - Worked on validation conditions for the file reader, multithreading implementation and speed testing, user interface and file information, updated readme. 
+**Billie Parsons** - Worked on validation conditions for the file reader, multithreading implementation and speed testing, user interface and file information, updated readme. 
 
-Toby Gascoigne - Worked on Employee Object - Helped fix up Validation conditions and created the database generation methods and overall opening and closing connections. Reading properties from a .properties filed found under resources and loaded them into memory.
+**Toby Gascoigne** - Worked on Employee Object - Helped fix up Validation conditions and created the database generation methods and overall opening and closing connections. Reading properties from a .properties filed found under resources and loaded them into memory.
 
-Alfred Abraham - Worked on validation conditions and all the overall validity checks within Employee.java and the worked closely with the team to create the main README.md
+**Alfred Abraham** - Worked on validation conditions and all the overall validity checks within Employee.java and the worked closely with the team to create the main README.md
+
+# Result: 
+![Result from running the code](resources/app_result.png)
+
 ## *Phase one*
 
 - Create a new project and write code to read data from an Employee CSV file.
@@ -31,7 +35,7 @@ We had issues finding the correct regex for some String objects so that anything
 We also had issues with other validation conditions.
 This was especially difficult in the case of the email, as a very specific input would be required.
 We solved this largely through trial and error by testing valid inputs via JUnit tests against out validation conditions.
-````
+```` java
 @BeforeEach
     void setUp() {
         employee = new Employee(647173,"Mr.",
@@ -81,7 +85,7 @@ Below is a screenshot showing that all threads were running concurrently.
 - Keep the original code and then run tests to see if efficiency has improved by adding functional code.
   ### **SOLUTION**
 Time for code to run: 1837msec without streams, 1287msec with streams
-````
+```` java
 try (Stream<String> linesStream = Files.lines(file.toPath())) {
             linesStream
                     .skip(1) // skip header
@@ -91,7 +95,7 @@ try (Stream<String> linesStream = Files.lines(file.toPath())) {
         }
 ````
 Use of lambdas for threads to avoid class explosion problem. In this situation our lambdas act as an anonymous implementation of the run-able functional interface as it only had the run method requirement. 
-````
+```` java
 private Thread getThread(HashSet<Employee> records, int from, int to) {
         return new Thread(() -> {
             System.out.println("Thread: " + Thread.currentThread().getName());

@@ -1,11 +1,10 @@
 package com.sparta.persistentData.database;
 
 import com.sparta.persistentData.Model.Employee;
+import lombok.SneakyThrows;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class RecordDao implements Dao<Employee>{
@@ -38,7 +37,8 @@ public class RecordDao implements Dao<Employee>{
                 preparedInsert.addBatch();
             }
             int[] updatedCount = preparedInsert.executeBatch();
-            System.out.println("rows inserted: " + Arrays.stream(updatedCount).sum());
+            System.out.println("rows inserted: " + Arrays.stream(updatedCount).sum()
+                + " by " + Thread.currentThread().getName());
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
