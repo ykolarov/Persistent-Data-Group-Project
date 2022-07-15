@@ -1,27 +1,27 @@
 package com.sparta.persistentData.Model;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
+import java.nio.file.Files;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class CsvReader {
 
-    public String readFile(String filename) {
-        String result = "";
-        try (FileReader fileReader = new FileReader(filename);
-             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-             String line;
-             bufferedReader.readLine();
-             while ((line = bufferedReader.readLine()) != null) {
-                 String[] recordValues = line.split(",");
-                 addNewEmployee(recordValues);
-             }
-        } catch(IOException e) {
+    public String readFile(String filename){
+        String result = "Data for file: " + filename;
+        var start = System.currentTimeMillis();
+        File file = new File(filename);
+        try (Stream<String> linesStream = Files.lines(file.toPath())) {
+            linesStream
+                    .skip(1) // skip header
+                    .forEach(line -> addNewEmployee(line.split(",")));
+        }catch (IOException e) {
             e.printStackTrace();
         }
+        var stop = System.currentTimeMillis();
+        System.out.println("streams took: " + (stop-start) + " ms to read all lines");
+
         result += "Amount of valid(unique and clean) records: " + Employee.getValidRecords().size();
         result += "\nAmount of invalid records: " + Employee.getInvalidRecords().size();
         result += "\nAmount of Employee ID duplicates: " + Employee.getIDDupCount();
@@ -32,11 +32,10 @@ public class CsvReader {
                 result += "\n" + Employee.getInvalidRecords().get(i).toString();
             }
         }
-
         return result;
     }
 
-    private void addNewEmployee(String[] recordValues){
+    private static void addNewEmployee(String[] recordValues){
         Employee employee = new Employee(
                 Integer.parseInt(recordValues [0]),
                 recordValues [1],
@@ -49,7 +48,7 @@ public class CsvReader {
                 new Date(recordValues [8]),
                 Integer.parseInt(recordValues [9])
         );
-        if (employee.checkValidity())
+        if (employee.isValidRecord())
             Employee.getValidRecords().add(employee);
         else Employee.getInvalidRecords().add(employee);
     }

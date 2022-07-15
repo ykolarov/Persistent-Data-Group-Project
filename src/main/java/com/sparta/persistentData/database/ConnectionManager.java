@@ -15,7 +15,7 @@ public class ConnectionManager {
     private String password;
     private FileInputStream fileInputStream;
     private Properties properties;
-    private static Connection connection;
+    private Connection connection;
 
     @SneakyThrows
     public Connection getDatabaseConnection() {
@@ -44,15 +44,13 @@ public class ConnectionManager {
     }
 
     private Connection getConnection() {
-        if (connection == null) {
-            try {
-                connection = DriverManager.getConnection(
-                        this.url, this.username, this.password
-                );
-                connection.setAutoCommit(false);
-            } catch (SQLException exception) {
-                exception.printStackTrace();
-            }
+        try {
+            connection = DriverManager.getConnection(
+                    this.url, this.username, this.password
+            );
+            connection.setAutoCommit(false);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
         }
         return connection;
     }
