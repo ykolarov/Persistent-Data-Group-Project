@@ -42,7 +42,9 @@ We solved this largely through trial and error by testing valid inputs via JUnit
 - Create a data access object (DAO Pattern) to persist the data to the database
 - Persist employee records and write code to retrieve individual records from the database
   ### **SOLUTION**
-
+We connected to the sakila database using a dbproperties file and a ConenctionManager class. This allowed us to
+create a table named employees and drop it if it existed. Then we were able to populate the employees table in 
+sakila with the valid employee objects we had created for phase 1 of this project.
 
 
 
