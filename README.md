@@ -2,6 +2,13 @@
 
 IN THIS README WE  WOULD BE SHOWING THE TASKS THAT WE WOULD BE COMPLETING AND HOW WE COMPLETED THEM AND WHAT ISSUES WE HAD ALONG THE WAY!
 
+Yanaki Kolarov - Worked on MVC structure; querying, insertion, table creation for database; conversion of csv text to an employee valid hashset or invalid arraylist(duplicates); multithreaded writing to database; Wrote tests.
+
+Billie Parsons - Worked on validation conditions for the file reader, multithreading implementation and speed testing, user interface and file information, updated readme. 
+
+Toby Gascoigne - Worked on Employee Object - Helped fix up Validation conditions and created the database generation methods and overall opening and closing connections. Reading properties from a .properties filed found under resources and loaded them into memory.
+
+Alfred Abraham - Worked on validation conditions and all the overall validity checks within Employee.java and the worked closely with the team to create the main README.md
 ## *Phase one*
 
 - Create a new project and write code to read data from an Employee CSV file.
@@ -61,7 +68,10 @@ We then optimised the code to add each data set to a batch, and then send the ba
 This brought the time taken down to 14 seconds.
 We then tried it with 2 threads, with each passing half of the data to the database. This still took 14 seconds.
 3 threads took 15 seconds, and 4 threads took 14 seconds.
+We had little to no time reduction between threads, so we tested if each thread was running concurrently or sequentially.
+Below is a screenshot showing that all threads were running concurrently.
 
+![Threads](https://media.discordapp.net/attachments/996431230880993453/997501085629562930/unknown.png?width=1280&height=903)
 
 
 
