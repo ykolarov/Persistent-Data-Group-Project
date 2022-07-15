@@ -47,16 +47,19 @@ create a table named employees and drop it if it existed. Then we were able to p
 sakila with the valid employee objects we had created for phase 1 of this project.
 
 
-
-
 ## *Phase Three*
 - Use the second file, (EmployeeRecordsLarge.csv), which can be assumed to have already been cleaned.
 - Record time taken to persist to MySQL before implementing multiple threads.
 - Add multithreading to your application for writing the data to the database, comparing the execution time with thee single-threaded version.
 - Try different numbers of threads and compare the results - what is the optimum number of threads? **Record this information in the README.md,**
-  ### **SOLUTION**
-- The large employee records took 14 seconds with a single thread (without multithreading)
 
+### **SOLUTION**
+We experimented with different amounts of threads when adding data from the EmployeeRecordsLarge.csv file to find the optimal time.
+Originally it took 18 seconds to pass all the data into the database
+We then optimised the code to add each data set to a batch, and then send the batch, rather than each data set individually.
+This brought the time taken down to 14 seconds.
+We then tried it with 2 threads, with each passing half of the data to the database. This still took 14 seconds.
+3 threads took 15 seconds, and 4 threads took 14 seconds.
 
 
 
@@ -66,3 +69,17 @@ sakila with the valid employee objects we had created for phase 1 of this projec
 - Modify code to make use of functional programming concepts - lambdas and streams.
 - Keep the original code and then run tests to see if efficiency has improved by adding functional code.
   ### **SOLUTION**
+
+````
+ try (FileReader fileReader = new FileReader(filename);
+             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+             String line;
+             bufferedReader.readLine();
+             while ((line = bufferedReader.readLine()) != null) {
+                 String[] recordValues = line.split(",");
+                 addNewEmployee(recordValues);
+             }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+````
