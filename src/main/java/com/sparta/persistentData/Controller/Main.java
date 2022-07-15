@@ -1,14 +1,8 @@
 package com.sparta.persistentData.Controller;
 
 import com.sparta.persistentData.Model.CsvReader;
-import com.sparta.persistentData.Model.DatabaseManager;
-import com.sparta.persistentData.Model.Employee;
+import com.sparta.persistentData.database.DatabaseManager;
 import com.sparta.persistentData.View.Displayer;
-import com.sparta.persistentData.database.ConnectionManager;
-import com.sparta.persistentData.database.RecordDao;
-
-import java.sql.Connection;
-import java.util.Scanner;
 
 public class Main {
 

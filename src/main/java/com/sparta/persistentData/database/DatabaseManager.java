@@ -1,4 +1,5 @@
-package com.sparta.persistentData.Model;
+package com.sparta.persistentData.database;
+import com.sparta.persistentData.Model.Employee;
 import com.sparta.persistentData.View.Displayer;
 import com.sparta.persistentData.database.ConnectionManager;
 import com.sparta.persistentData.database.RecordDao;
