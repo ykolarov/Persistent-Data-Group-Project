@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         CsvReader csvReader = new CsvReader(); // model
         Displayer displayer = new Displayer(); // view
-        DatabaseManager databaseManager = new DatabaseManager(); // model
+        DatabaseManager databaseManager = new DatabaseManager(NUMBER_OF_THREADS); // model
 
         String result = csvReader.readFile(FILE_NAME);
         displayer.displayData(result);

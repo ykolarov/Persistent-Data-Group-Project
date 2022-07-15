@@ -3,14 +3,29 @@ package com.sparta.persistentData.Model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.stream.Stream;
 
 public class CsvReader {
 
     public String readFile(String filename) {
         String result = "Data for file: " + filename;
+
+//        try {
+//            Stream<String> lines = Files.lines(Path.of("C:\\Users\\35987\\Desktop\\B&B\\PersistentData\\resources\\EmployeeRecords1.csv"));
+//
+//            lines.forEach(str -> Arrays.stream(str.split(",")).toArray());
+//            addNewEmployee((String[]) lines.);
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+
         try (FileReader fileReader = new FileReader(filename);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
              String line;
@@ -33,7 +48,9 @@ public class CsvReader {
             }
         }
 
-        return result;
+
+
+        return "result";
     }
 
     private void addNewEmployee(String[] recordValues){
