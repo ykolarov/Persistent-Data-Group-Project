@@ -44,7 +44,8 @@ We solved this largely through trial and error by testing valid inputs via JUnit
   ### **SOLUTION**
 We connected to the sakila database using a dbproperties file and a ConenctionManager class. This allowed us to
 create a table named employees and drop it if it existed. Then we were able to populate the employees table in 
-sakila with the valid employee objects we had created for phase 1 of this project.
+sakila with the valid employee objects we had created for phase 1 of this project. We disabled the autocommit feature
+and used prepared statements, but also inserted the records as a batch to avoid unnecessary communication with the DB.
 
 
 ## *Phase Three*
@@ -69,17 +70,24 @@ We then tried it with 2 threads, with each passing half of the data to the datab
 - Modify code to make use of functional programming concepts - lambdas and streams.
 - Keep the original code and then run tests to see if efficiency has improved by adding functional code.
   ### **SOLUTION**
-
+Time for code to run: 1837msec without streams, 1287msec with streams
 ````
- try (FileReader fileReader = new FileReader(filename);
-             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-             String line;
-             bufferedReader.readLine();
-             while ((line = bufferedReader.readLine()) != null) {
-                 String[] recordValues = line.split(",");
-                 addNewEmployee(recordValues);
-             }
-        } catch(IOException e) {
+try (Stream<String> linesStream = Files.lines(file.toPath())) {
+            linesStream
+                    .skip(1) // skip header
+                    .forEach(line -> addNewEmployee(line.split(",")));
+        } catch (IOException e) {
             e.printStackTrace();
         }
+````
+Use of lambdas for threads to avoid class explosion problem. In this situation our lambdas act as an anonymous implementation of the run-able functional interface as it only had the run method requirement. 
+````
+private Thread getThread(HashSet<Employee> records, int from, int to) {
+        return new Thread(() -> {
+            System.out.println("Thread: " + Thread.currentThread().getName());
+            var collectionPortion = records.stream().
+                    toList().subList(from, to);
+            recordDao.saveAll(new HashSet<>(collectionPortion));
+        });
+    }
 ````
